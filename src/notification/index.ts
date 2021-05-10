@@ -1,6 +1,7 @@
 import CookieManager from "../cookies/cookie-manager";
 import DefaultNotification from "./default-notification";
 import store from "../store";
+import EventBus from "../store/event-bus";
 import { getAllPurposes } from "../utils";
 
 const Status = {
@@ -74,6 +75,16 @@ export default class CookieNotification {
         this.hideCookieNotification();
         this.togglePreferences(Status.DISABLED);
       });
+    }
+
+    // Make sure notification is hidden whenever a change to preferences happen
+    const purposes = getAllPurposes();
+
+    for (const purpose of purposes) {
+      EventBus.on(
+        `${purpose}-disabled`,
+        this.hideCookieNotification.bind(this)
+      );
     }
   }
 
