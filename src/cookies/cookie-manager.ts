@@ -65,6 +65,19 @@ export default class CookieManager {
   /**
    * Enable the functional cookie.
    */
+  public setCookiesDefault(): void {
+    const purposes = getAllPurposes();
+    for (const purpose of purposes) {
+      // If purpose not set, set it to false by default
+      if (!CookieManager.cookieExists(`${this.prefix}-${purpose}`)) {
+        this.disableCookies(purpose);
+      }
+    }
+  }
+
+  /**
+   * Enable the functional cookie.
+   */
   public enableFunctionalCookie(): void {
     CookieManager.setCookie(
       `${this.prefix}-functional`,
