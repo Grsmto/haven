@@ -1,6 +1,7 @@
 import CookieManager from "../cookies/cookie-manager";
 import DefaultNotification from "./default-notification";
 import store from "../store";
+import EventBus from "../store/event-bus";
 import { getAllPurposes } from "../utils";
 
 const Status = {
@@ -56,7 +57,7 @@ export default class CookieNotification {
 
     // Accept all cookies
     if (this.cookiesAccept !== null) {
-      this.cookiesAccept.addEventListener("click", (event) => {
+      this.cookiesAccept.addEventListener("click", event => {
         this.cookieManager.enableAllCookies();
         this.hideCookieNotification();
         this.togglePreferences(Status.ENABLED);
@@ -65,13 +66,23 @@ export default class CookieNotification {
 
     // Decline all but the functional cookie
     if (this.cookiesDecline !== null) {
-      this.cookiesDecline.addEventListener("click", (event) => {
+      this.cookiesDecline.addEventListener("click", event => {
         // Only set the functional cookie.
         this.cookieManager.disableAllCookies();
         this.cookieManager.enableFunctionalCookie();
         this.hideCookieNotification();
         this.togglePreferences(Status.DISABLED);
       });
+    }
+
+    // Make sure notification is hidden whenever a change to preferences happen
+    const purposes = getAllPurposes();
+
+    for (const purpose of purposes) {
+      EventBus.on(
+        `${purpose}-disabled`,
+        this.hideCookieNotification.bind(this)
+      );
     }
   }
 

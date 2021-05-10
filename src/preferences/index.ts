@@ -1,7 +1,7 @@
 import CookieManager from "../cookies/cookie-manager";
 import store from "../store";
 import DefaultPreferences from "./default-preferences";
-import { getAllPurposes, trans } from "../utils";
+import { getAllPurposes } from "../utils";
 
 export default class CookiePreferences {
   /** Cookie manager instance */
