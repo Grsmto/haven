@@ -112,8 +112,8 @@ const createNotification = (): string => {
         ${trans('notification.message')} <a href="${options.policyUrl}" target="_blank">${trans('notification.policy')}</a>
     </p>
     <div class="hv-notification__actions">
-        <button id="cookie-notification__decline" class="hv-notification-button hv-notification__decline">${trans('notification.decline')}</button>
-        <button id="cookie-notification__accept" class="hv-notification-button hv-notification__accept">${trans('notification.accept')}</button>
+        <button id="cookie-notification__decline" type="button" class="hv-notification-button hv-notification__decline">${trans('notification.decline')}</button>
+        <button id="cookie-notification__accept" type="button" class="hv-notification-button hv-notification__accept">${trans('notification.accept')}</button>
     </div>
   </div>
   `;

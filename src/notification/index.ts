@@ -57,7 +57,6 @@ export default class CookieNotification {
     // Accept all cookies
     if (this.cookiesAccept !== null) {
       this.cookiesAccept.addEventListener("click", event => {
-        event.preventDefault();
         this.cookieManager.enableAllCookies();
         this.hideCookieNotification();
         this.togglePreferences(Status.ENABLED);
@@ -67,7 +66,6 @@ export default class CookieNotification {
     // Decline all but the functional cookie
     if (this.cookiesDecline !== null) {
       this.cookiesDecline.addEventListener("click", event => {
-        event.preventDefault();
         // Only set the functional cookie.
         this.cookieManager.disableAllCookies();
         this.cookieManager.enableFunctionalCookie();
