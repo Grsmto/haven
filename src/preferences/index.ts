@@ -46,6 +46,7 @@ export default class CookiePreferences {
         checkbox.checked = this.cookieManager.hasCookiesEnabled(purpose);
         checkbox.addEventListener("change", () => {
           this.cookieManager.enableFunctionalCookie();
+          this.cookieManager.setCookiesDefault();
           if (checkbox.checked) {
             this.cookieManager.enableCookies(purpose);
           } else {
