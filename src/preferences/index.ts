@@ -37,6 +37,10 @@ export default class CookiePreferences {
   public attachListeners(): void {
     const purposes = getAllPurposes();
     const checkboxes: { [purpose: string]: HTMLInputElement } = {};
+    const saveButton = document.getElementById(
+      "cookie-preferences__save"
+    ) as HTMLButtonElement;
+
     for (const purpose of purposes) {
       const checkbox = <HTMLInputElement | null>(
         document.getElementById(`cookie-preferences--${purpose}`)
@@ -45,6 +49,10 @@ export default class CookiePreferences {
         checkboxes[purpose] = checkbox;
         checkbox.checked = this.cookieManager.hasCookiesEnabled(purpose);
         checkbox.addEventListener("change", () => {
+          if (saveButton !== null) {
+            saveButton.disabled = false;
+            return;
+          }
           this.cookieManager.enableFunctionalCookie();
           this.cookieManager.setCookiesDefault();
           if (checkbox.checked) {
@@ -56,7 +64,6 @@ export default class CookiePreferences {
       }
     }
 
-    const saveButton = document.getElementById("cookie-preferences__save");
     if (saveButton !== null) {
       saveButton.addEventListener("click", () => {
         this.cookieManager.enableFunctionalCookie();
@@ -71,6 +78,7 @@ export default class CookiePreferences {
         if (notification !== null) {
           notification.style.display = "none";
         }
+        saveButton.disabled = true;
       });
     }
   }
