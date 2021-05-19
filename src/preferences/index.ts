@@ -1,5 +1,6 @@
 import CookieManager from "../cookies/cookie-manager";
 import store from "../store";
+import EventBus from "../store/event-bus";
 import DefaultPreferences from "./default-preferences";
 import { getAllPurposes } from "../utils";
 
@@ -49,6 +50,7 @@ export default class CookiePreferences {
         checkboxes[purpose] = checkbox;
         checkbox.checked = this.cookieManager.hasCookiesEnabled(purpose);
         checkbox.addEventListener("change", () => {
+          EventBus.emit("preferences-change");
           if (saveButton !== null) {
             saveButton.disabled = false;
             return;
