@@ -23,8 +23,9 @@ export default class Haven {
   private static instance: Haven;
   private cookieNotification: CookieNotification;
   private cookiePreferences: CookiePreferences;
-  private cookieManager: CookieManager;
   private serviceLoader: ServiceLoader;
+
+  public cookieManager: CookieManager;
 
   private constructor(options: Partial<HavenOptions>) {
     ConfigurationResolver.resolve(options);
