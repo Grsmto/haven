@@ -3,22 +3,22 @@ export interface Translations {
 }
 
 export interface Translation {
-  notification: NotificationTranslation;
-  preferences: PreferencesTranslation;
-  purposes: Purposes;
+  notification?: NotificationTranslation;
+  preferences?: PreferencesTranslation;
+  purposes?: Purposes;
 }
 
 export interface NotificationTranslation {
-  message: string;
-  policy: string;
-  accept: string;
-  decline: string;
+  message?: string;
+  policy?: string;
+  accept?: string;
+  decline?: string;
 }
 
 export interface PreferencesTranslation {
-  description: string;
-  save: string;
-  saved: string;
+  description?: string;
+  save?: string;
+  saved?: string;
 }
 
 export interface Purposes {
@@ -26,6 +26,6 @@ export interface Purposes {
 }
 
 export interface Purpose {
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
 }
